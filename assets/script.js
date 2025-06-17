@@ -3,45 +3,45 @@ let currentTaskIndex = 0;
 let completedTasks = 0;
 const totalTasks = 7;
 let timerInterval;
-let timerMinutes = 30;
+let timerMinutes = 60; // שינוי לשעה
 let timerSeconds = 0;
 let timerSound; // לקובץ ה-MP3
 
-// משימות המשחק
+// משימות המשחק - קונספט חדש מלא
 const tasks = [
     {
-        title: "שלב 1: סידור מקדים 🏠",
-        description: "סידור השולחן, סידור המרפסת לערב דייט, ניקיון כללי, הבאת חטיפים ושתייה קלה",
+        title: "🎯 שלב 1: התחלת המשימה הראשונה",
+        description: "על מנת למצוא את המטמון, עלייך לבצע משימות. את המשימות תוכלי להטיל גם על עמית!\n\n📋 המשימות:\n• משימה ראשונה - לסדר את השולחן ואת המרפסת\n• משימה שנייה - ניקיון כללי\n\n🎁 אחרי ביצוע 2 המשימות תוכלי לקבל פרס קטן לפני המטמון!",
         type: "normal"
     },
     {
-        title: "שלב 2: חיבור נינטנדו סוויץ 🎮",
-        description: "חיבור הנינטנדו וביצוע משחק מריו קארט למשך 30 דקות",
+        title: "🏆 שלב 2: אתגר המריו קארט הגדול!",
+        description: "אחרי מנוחה קטנה, קיבלת אתגר חדש! 💪\n\n🎮 המשימה: לנצח את עמית במריו קארט!\n⏰ יש לך שעה שלמה לביצוע האתגר\n\n🚬 כללי הניצחון:\n• אם את ניצחת → עמית מגלגל סיגריה לשניכם\n• אם עמית ניצח → את מגלגלת סיגריה לשניכם",
         type: "timer"
     },
     {
-        title: "🚨 משימת חירום - הורדת פאניקה 🚨",
-        description: "רגע לגלגל סיגרייה ולעשן ברגוע",
+        title: "🚨 אזהרת ניצחון - הפסקת המפסיד! 🚨",
+        description: "על המפסיד לגלגל סיגריה ולצאת להפסקה! 🔥\n\n⚡ בזמן ההפסקה על המפסיד לבצע כל בקשה של המנצח!\n\n💨 תיהני מההפסקה הזאת...",
         type: "emergency"
     },
     {
-        title: "שלב 3: הדייט עצמו 🍷",
-        description: "סידור מקדים - הוצאת יין, שתייה (יין ובירה), סידור שולחן, פתיחת סדרה בטלוויזיה, הבאת אוכל ודייט רומנטי",
+        title: "🔍 שלב 3: המטמון כמעט נמצא!",
+        description: "המטמון כמעט נמצא, אבל יש עוד משימה! 🕵️‍♀️\n\n📺 תחילה: בחרי סדרה או סרט לראות יחד\n🍷 כדי למצוא את המטמון, עמית צריך לתת לך הוראות!\n\n📝 ההוראות שלו:\n• להוציא יין\n• להוציא בירה\n\n🎉 המטמון כמעט מגיע! הגבר המעצבן שלך עמית ימצא לך אותו!",
         type: "normal"
     },
     {
-        title: "שלב 4: ניקיון הסוף 🧹",
-        description: "לסדר את כל האזור, להכין את פחי הזבל ולהחליף אותם",
-        type: "normal"
+        title: "💕 שלב 4: משחק השאלות הזוגיות!",
+        description: "הדייט עדיין לא נגמר! עכשיו האתגר האמיתי! 🎯\n\n📝 עליכם לשאול אחד את השני 4 שאלות ולרשום את התשובות על דף!\n\n❓ השאלות:\n1️⃣ אם היינו זוג מפורסם, מי היינו?\n2️⃣ אם הכל היה רגוע ורגיל, איפה היינו רוצים לטייל עכשיו בעולם?\n3️⃣ איזה הרגל של עמית זיו הכי שונאת?\n4️⃣ איזה הרגל של זיו עמית הכי שונא?\n\n🏆 אם התשובה זהה = נקודה!\n\n🎁 3 נקודות = ניצחתם! הפסקת סיגריה!\n😅 פחות מ-3 = קמו מיידי לסדר ולנקות הבית ולזרוק זבל!",
+        type: "quiz"
     },
     {
-        title: "שלב 5: המשימה האחרונה 🐕",
-        description: "להוציא את קלי הכלבה שלנו לטיול ובמקביל לזרוק את הזבל, ולחזור הביתה",
+        title: "💖 שלב 5: רגעי אמת - מה שגורם לנו לנצח!",
+        description: "השלב הכי חשוב במשחק! 💎\n\n📱 כל אחד רושם בפתק בטלפון (בנפרד!):\n\n💕 מה לדעתך 2 הדברים שגורמים לזוגיות שלכם לנצח את הכל?\n\n✍️ תנסו להרחיב כמה שיותר ולתת דוגמאות!\n\n🐕 אחרי שכתבתם:\n• קחו את קלי לטיול\n• תוך כדי הטיול שתפו אחד את השני במה שכתבתם\n\nזה הרגע הכי משמעותי במשחק! 🌟",
         type: "final"
     },
     {
-        title: "🚨 משימת חירום אחרונה 🚨",
-        description: "סיגרייה אחרונה להורדת הפאניקה לפני הסיום",
+        title: "🚨 הפסקה אחרונה לפני הסיום! 🚨",
+        description: "רגע אחרון של נשימה לפני שסוגרים את המשחק! 💨\n\n🚬 סיגרייה אחרונה להורדת הפאניקה\n🎊 מתכוננים לחגיגת הסיום!\n\nהמשחק כמעט הסתיים! 🎉",
         type: "emergency"
     }
 ];
@@ -130,6 +130,13 @@ function showCurrentTask() {
     
     const task = tasks[currentTaskIndex];
     
+    // אפקט מיוחד למשימות חשובות
+    if (task.type === 'quiz') {
+        createSpecialEffect('quiz');
+    } else if (task.type === 'final') {
+        createSpecialEffect('love');
+    }
+    
     let taskHTML = `
         <div class="task-item ${task.type}" id="current-task">
             <div class="task-title">${task.title}</div>
@@ -140,18 +147,18 @@ function showCurrentTask() {
     if (task.type === 'timer') {
         taskHTML += `
             <div class="timer-section">
-                <div class="timer-display" id="timerDisplay">30:00</div>
+                <div class="timer-display" id="timerDisplay">60:00</div>
                 <div class="timer-controls">
-                    <button class="timer-btn" onclick="startTimer()">התחל טיימר</button>
+                    <button class="timer-btn" onclick="startTimer()">התחל אתגר! 🎮</button>
                     <button class="timer-btn" onclick="stopTimer()">עצור טיימר</button>
                     <button class="timer-btn" onclick="resetTimer()">אפס טיימר</button>
                 </div>
                 <div class="timer-sound-info">
-                    📢 קובץ צליל לטיימר: 
+                    🎵 צליל סיום האתגר: 
                     <br>
                     <input type="file" accept="audio/*" onchange="loadTimerSound(this)" style="margin-top: 10px;">
                     <br>
-                    <small>העלה קובץ MP3 לצליל סיום הטיימר</small>
+                    <small>העלה קובץ MP3 לצליל סיום השעה</small>
                 </div>
             </div>
         `;
@@ -160,9 +167,13 @@ function showCurrentTask() {
     // כפתור השלמת המשימה
     let buttonText = 'המשימה הושלמה! ✅';
     if (task.type === 'emergency') {
-        buttonText = 'סיימתי לעשן 🚬';
+        buttonText = 'סיימתי את ההפסקה! 🚬';
     } else if (task.type === 'final') {
-        buttonText = 'חזרנו מהטיול! 🏠';
+        buttonText = 'חזרנו מהטיול והשתפנו! 💕';
+    } else if (task.type === 'timer') {
+        buttonText = 'האתגר הושלם! מי ניצח? 🏆';
+    } else if (task.type === 'quiz') {
+        buttonText = 'סיימנו את משחק השאלות! 🎯';
     }
     
     taskHTML += `
@@ -223,13 +234,32 @@ function completeCurrentTask() {
 
 // הודעת עידוד
 function showEncouragementMessage() {
-    const messages = [
-        "כל הכבוד! 🎉",
-        "מדהימה! 💪",
-        "המשיכי כך! ⭐",
-        "פנטסטי! 🌟",
-        "את מושלמת! 💖"
+    const task = tasks[currentTaskIndex - 1]; // המשימה שהושלמה
+    let messages = [
+        "מדהים! 🔥",
+        "כל הכבוד לוחמת! 💪", 
+        "את שולטת! ⚡",
+        "כמו אלופה! 🏆",
+        "מושלמת! 💎",
+        "המשיכי להדליק! 🌟"
     ];
+    
+    // הודעות מיוחדות לכל סוג משימה
+    if (task && task.type === 'quiz') {
+        messages = [
+            "איזה משחק שאלות מדהים! 💕",
+            "הכרתם אחד את השני יותר! 🎯",
+            "רגעים יפים ביחד! 💖",
+            "זוגיות מנצחת! 🏆"
+        ];
+    } else if (task && task.type === 'final') {
+        messages = [
+            "איזה טיול משמעותי! 💕",
+            "שיתוף כזה יפה! 🌟",
+            "הלב מתרגש! 💖",
+            "אהבה אמיתית! 💎"
+        ];
+    }
     
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     
@@ -271,7 +301,64 @@ function showEncouragementMessage() {
 
 // עדכון הפרוגרס
 function updateProgress() {
-    updateFixedProgress(); // עדכון הפרוגרס הקבוע
+    updateFixedProgress(); // אפקט מיוחד למשימות חשובות
+function createSpecialEffect(type) {
+    const container = document.getElementById('backgroundAnimation');
+    
+    if (type === 'quiz') {
+        // אפקט שאלונים מרחפים
+        for (let i = 0; i < 8; i++) {
+            const question = document.createElement('div');
+            question.className = 'special-effect quiz-effect';
+            question.innerHTML = '❓';
+            question.style.left = Math.random() * 100 + '%';
+            question.style.top = Math.random() * 100 + '%';
+            question.style.animationDelay = Math.random() * 2 + 's';
+            question.style.cssText += `
+                position: absolute;
+                color: #e91e63;
+                font-size: 25px;
+                animation: quizFloat 4s ease-in-out infinite;
+                opacity: 0.7;
+                z-index: 1;
+            `;
+            container.appendChild(question);
+            
+            // הסרה אחרי 10 שניות
+            setTimeout(() => {
+                if (question.parentNode) {
+                    question.remove();
+                }
+            }, 10000);
+        }
+    } else if (type === 'love') {
+        // אפקט לבבות מיוחד
+        for (let i = 0; i < 12; i++) {
+            const love = document.createElement('div');
+            love.className = 'special-effect love-effect';
+            love.innerHTML = '💖';
+            love.style.left = Math.random() * 100 + '%';
+            love.style.top = Math.random() * 100 + '%';
+            love.style.animationDelay = Math.random() * 3 + 's';
+            love.style.cssText += `
+                position: absolute;
+                color: #e17055;
+                font-size: 30px;
+                animation: loveFloat 5s ease-in-out infinite;
+                opacity: 0.8;
+                z-index: 1;
+            `;
+            container.appendChild(love);
+            
+            // הסרה אחרי 15 שניות
+            setTimeout(() => {
+                if (love.parentNode) {
+                    love.remove();
+                }
+            }, 15000);
+        }
+    }
+}
 }
 
 // פונקציות טיימר
@@ -317,7 +404,7 @@ function stopTimer() {
 
 function resetTimer() {
     stopTimer();
-    timerMinutes = 30;
+    timerMinutes = 60; // שינוי לשעה
     timerSeconds = 0;
     updateTimerDisplay();
     
@@ -373,12 +460,12 @@ function playTimerSound() {
 }
 
 function showTimerEndMessage() {
-    alert('🎮 הזמן הסתיים! 30 דקות של מריו קארט הושלמו! עכשיו אפשר לעבור למשימה הבאה! 🎉');
+    alert('🏆 הזמן הסתיים! שעה של מריו קארט הושלמה! מי ניצח באתגר? עכשיו זמן להכריז על המנצח! 🎉');
     
     // הופך את הטיימר לאדום
     const timerDisplay = document.getElementById('timerDisplay');
     timerDisplay.style.color = '#f44336';
-    timerDisplay.textContent = 'הזמן הסתיים! ⏰';
+    timerDisplay.textContent = 'האתגר הסתיים! 🏁';
 }
 
 // עדכון הפרוגרס הקבוע
@@ -457,6 +544,6 @@ function closeFinalPopup() {
     
     // הודעת סיום
     setTimeout(() => {
-        alert('🎉 תודה ששיחקת! מקווה שנהנת מהדייט המושלם! ❤️');
+        alert('🎉 תודה שיחקת! עכשיו תהני מהדייט המושלם! ❤️');
     }, 500);
 }
