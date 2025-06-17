@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחק חפש המטמון - דייט רומנטי</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <!-- אנימציית רקע -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+    
+    <!-- מסך ברכה -->
+    <div class="screen active" id="welcomeScreen">
+        <div class="welcome-screen">
+            <div class="couple-photo">
+                <!-- תחליף את זה עם התמונה שלכם -->
+                <img src="assets/couple.jpg" alt="תמונה שלכם" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="photo-placeholder">תמונה שלכם ❤️</div>
+            </div>
+            <div class="love-message">
+                לזיוי שלי החיים הם עליות וירידות אבל בעליות אני רוצה לטפס איתך ובירידות להתגלץ איתך ולא לחושב על מה שרע, שתדעי שאני מאוד אוהב אותך ודאגתי למשחק קטן של חפש את המטמון בשבילך
+            </div>
+            <button class="start-button" onclick="showRules()">התחל במשחק! 🎮</button>
+        </div>
+    </div>
+    
+    <!-- מסך חוקים -->
+    <div class="screen" id="rulesScreen">
+        <div class="rules-screen">
+            <h2 class="rules-title">חוקי המשחק 📋</h2>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <strong>חוק 1:</strong> אין לרמות! המשחק הוא הרפתקה אמיתית 🚫
+                </div>
+                <div class="rule-item">
+                    <strong>חוק 2:</strong> יש לבצע כל משימה עד תום ולקבל אישור מעמית המלך שיחיה לשנים ארוכות 👑
+                </div>
+                <div class="rule-item">
+                    <strong>חוק 3:</strong> תמיד לחייך ולהנות מהתהליך! 😊
+                </div>
+                <div class="rule-item">
+                    <strong>חוק 4:</strong> את הולכת לעבור סדרת משימות כיפיות לארגון הדייט המושלם של מית ואיב ❤️
+                </div>
+            </div>
+            <button class="start-button" onclick="showTasks()">בואי נתחיל! 🎯</button>
+        </div>
+    </div>
+    
+    <!-- מסך משימות -->
+    <div class="screen" id="tasksScreen">
+        <div class="tasks-screen">
+            <div class="progress-section">
+                <div class="eevee-counter">
+                    <span>איבי הפוקימון:</span>
+                    <span id="eeveeCount">0</span>
+                    <span>🦊</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="dog-icon">
+                    <!-- תחליף עם תמונת קלי -->
+                    <img src="assets/Kelly.jpg" alt="קלי" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="dog-placeholder">קלי 🐕</span>
+                </div>
+            </div>
+            
+            <!-- המשימה הנוכחית -->
+            <div id="currentTask">
+                <!-- המשימות יוצגו כאן אחת בכל פעם -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- מסך סיום -->
+    <div class="screen" id="finalScreen">
+        <div class="final-screen">
+            <div class="celebration">🎉🎊❤️</div>
+            <div class="final-message">
+                מזל טוב אהבה שלי, את הערב דייט האיראנים לא יקחו מאיתנו וכל יום האהבה שלנו גדלה ולדעתי זה הערב דייט האולטימטיבי שלנו.
+                אני כאן תמיד בשבילך אוהב תמיד מיתי
+            </div>
+            <button class="start-button" onclick="showFinalPopup()">סיום המשחק! 🏆</button>
+        </div>
+    </div>
+    
+    <!-- פרוגרס בר קבוע בתחתית -->
+    <div class="fixed-progress-bar" id="fixedProgressBar" style="display: none;">
+        <div class="progress-content">
+            <div class="eevee-counter-fixed">
+                <span>איבי:</span>
+                <span id="eeveeCountFixed">0</span>
+                <span>🦊</span>
+            </div>
+            <div class="progress-bar-fixed">
+                <div class="progress-fill-fixed" id="progressFillFixed"></div>
+                <div class="progress-text">המשימה <span id="currentTaskNumber">1</span> מתוך 7</div>
+            </div>
+            <div class="dog-icon-fixed">
+                <img src="assets/Kelly.jpg" alt="קלי" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <span class="dog-placeholder-fixed">🐕</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- פופאפ סיום -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="finalPopup">
+        <div class="celebration">🎊✨🎉</div>
+        <h2 style="color: #ff69b4; margin-bottom: 20px;">המשחק הושלם בהצלחה!</h2>
+        <p style="font-size: 18px; line-height: 1.6;">
+            מקווה שנהנת מהדייט האולטימטיבי מית! ❤️
+        </p>
+        <button class="start-button" onclick="closeFinalPopup()" style="margin-top: 20px;">
+            תודה מיתי! 💕
+        </button>
+    </div>
+
+    <!-- טעינת קובץ ה-JavaScript -->
+    <script src="assets/script.js"></script>
+</body>
+</html>
